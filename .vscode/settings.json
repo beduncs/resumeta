@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "local database",
+            "database": "/Users/benduncan/Documents/dev/resameta/local_db.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
