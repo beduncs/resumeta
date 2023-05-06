@@ -7,5 +7,8 @@
             "database": "/Users/benduncan/Documents/dev/resameta/local_db.db"
         }
     ],
-    "sqltools.useNodeRuntime": true
+    "sqltools.useNodeRuntime": true,
+    "python.linting.flake8Enabled": false,
+    "python.linting.enabled": true,
+    "python.linting.pydocstyleEnabled": true
 }
