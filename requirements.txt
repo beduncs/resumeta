@@ -1,2 +1,7 @@
 pyyaml
 sqlalchemy
+
+# Dev
+flake8
+mypy
+pydocstyle
