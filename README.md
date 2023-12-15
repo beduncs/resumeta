@@ -6,6 +6,17 @@ The core component of this applications is the master resume which list every po
 
 There is also integration with ChatGPT for line item generation and cover letter creation with constructed resume context.
 
+## Project Plan
+
+This project will take a phased approach, building up capability and maturity from an initial MVP.
+
+[] Rapid MVP with Streamlit and SQLite
+[] Alembic Migrations
+[] API Abstraction (https://medium.com/@estretyakov/the-ultimate-async-setup-fastapi-sqlmodel-alembic-pytest-ae5cdcfed3d4)
+[] Async PostgreSQL
+[] Custom User Interface
+[] Authentication
+
 ## Components
 
 Data
