@@ -1,1 +1,1 @@
-"""Init for resumate regular package."""
+"""Init for resumeta regular package."""
