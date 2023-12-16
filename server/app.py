@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import os
 from dotenv import load_dotenv
-from resumeta.models.resume import Resume, Employment, Institution, Education
+from server.models.resume import Resume, Employment, Institution, Education
 import json
 
 load_dotenv()  # take environment variables from .env.

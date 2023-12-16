@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 from beanie import init_beanie
 from motor import motor_asyncio
-from resumeta.models.resume import (
+from server.models.resume import (
     ResumeDocument,
     EmploymentDocument,
     EducationDocument,

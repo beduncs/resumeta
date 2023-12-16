@@ -7,12 +7,12 @@ from beanie.operators import AddToSet, Push
 from fastapi import APIRouter, HTTPException, status
 from loguru import logger
 
-from resumeta.models.resume import (
+from server.models.resume import (
     ActivityDocument,
     EmploymentDocument,
     UpdateEmployment,
 )
-from resumeta.utils import pydantic_encoder
+from server.utils import pydantic_encoder
 
 logger.add("resumeta.log", format="{time} {level} {message}", level="INFO")
 router = APIRouter()
