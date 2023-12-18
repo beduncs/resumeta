@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from .database import init_db
 from .routes.activity import router as ActivityRouter
@@ -17,6 +18,19 @@ async def start_db(app: FastAPI):
 
 
 app = FastAPI(lifespan=start_db)
+
+origins = [
+    "http://localhost",
+    "http://localhost:8081",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 app.include_router(ResumeRouter, tags=["Resumes"], prefix="/resumes")

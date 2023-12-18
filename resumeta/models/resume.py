@@ -6,7 +6,7 @@ from typing import List, Optional
 from beanie import Document, Link
 from pydantic import BaseModel
 
-from server.utils.pydantic_encoder import date_encoder
+from resumeta.utils.pydantic_encoder import date_encoder
 
 
 class User(BaseModel):
