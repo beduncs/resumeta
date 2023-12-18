@@ -63,9 +63,7 @@ async def update_employment(
     "/{employment_id}/activity/{activity_id}",
     response_model=EmploymentDocument,
 )
-async def add_activity(
-    employment_id: PydanticObjectId, activity_id: PydanticObjectId
-):
+async def add_activity(employment_id: PydanticObjectId, activity_id: PydanticObjectId):
     """Add an activity to an employment."""
     employment = await get_employment(employment_id)
     activity = await ActivityDocument.get(activity_id)

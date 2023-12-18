@@ -18,9 +18,7 @@ logger.add("resumeta.log", format="{time} {level} {message}", level="INFO")
 router = APIRouter()
 
 
-@router.post(
-    "/", status_code=status.HTTP_201_CREATED, response_model=ResumeDocument
-)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=ResumeDocument)
 async def create_resume(resume: ResumeDocument):
     """Create a new resume."""
     await resume.insert()
@@ -48,9 +46,7 @@ async def get_resume(resume_id: PydanticObjectId):
 
 
 @router.put("/{resume_id}", response_model=ResumeDocument)
-async def update_resume(
-    resume_id: PydanticObjectId, resume_data: UpdateResume
-):
+async def update_resume(resume_id: PydanticObjectId, resume_data: UpdateResume):
     """Update a resume by id."""
     resume = await get_resume(resume_id)
     resume_data = pydantic_encoder.encode_input(resume_data)
@@ -59,12 +55,8 @@ async def update_resume(
     return updated_resume
 
 
-@router.post(
-    "/{resume_id}/employment/{employment_id}", response_model=ResumeDocument
-)
-async def add_employment(
-    resume_id: PydanticObjectId, employment_id: PydanticObjectId
-):
+@router.post("/{resume_id}/employment/{employment_id}", response_model=ResumeDocument)
+async def add_employment(resume_id: PydanticObjectId, employment_id: PydanticObjectId):
     """Add employment to a resume."""
     resume = await ResumeDocument.get(resume_id)
     employment = await EmploymentDocument.get(employment_id)
@@ -74,9 +66,7 @@ async def add_employment(
     return resume
 
 
-@router.delete(
-    "/{resume_id}/resume/{employment_id}", response_model=ResumeDocument
-)
+@router.delete("/{resume_id}/resume/{employment_id}", response_model=ResumeDocument)
 async def remove_employment(
     resume_id: PydanticObjectId, employment_id: PydanticObjectId
 ):
@@ -89,12 +79,8 @@ async def remove_employment(
     return resume
 
 
-@router.post(
-    "/{resume_id}/education/{education_id}", response_model=ResumeDocument
-)
-async def add_education(
-    resume_id: PydanticObjectId, education_id: PydanticObjectId
-):
+@router.post("/{resume_id}/education/{education_id}", response_model=ResumeDocument)
+async def add_education(resume_id: PydanticObjectId, education_id: PydanticObjectId):
     """Add education to a resume."""
     resume = await ResumeDocument.get(resume_id)
     education = await EducationDocument.get(education_id)
@@ -104,12 +90,8 @@ async def add_education(
     return resume
 
 
-@router.delete(
-    "/{resume_id}/education/{education_id}", response_model=ResumeDocument
-)
-async def remove_education(
-    resume_id: PydanticObjectId, education_id: PydanticObjectId
-):
+@router.delete("/{resume_id}/education/{education_id}", response_model=ResumeDocument)
+async def remove_education(resume_id: PydanticObjectId, education_id: PydanticObjectId):
     """Delete a education from a resume by id."""
     resume = await get_resume(resume_id)
     education = await EducationDocument.get(education_id)

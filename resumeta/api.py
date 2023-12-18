@@ -20,9 +20,7 @@ app = FastAPI(lifespan=start_db)
 
 
 app.include_router(ResumeRouter, tags=["Resumes"], prefix="/resumes")
-app.include_router(
-    EmploymentRouter, tags=["Employments"], prefix="/employment"
-)
+app.include_router(EmploymentRouter, tags=["Employments"], prefix="/employment")
 app.include_router(EducationRouter, tags=["Education"], prefix="/education")
 app.include_router(ActivityRouter, tags=["Activities"], prefix="/activity")
 

@@ -17,9 +17,7 @@ logger.add("resumeta.log", format="{time} {level} {message}", level="INFO")
 router = APIRouter()
 
 
-@router.post(
-    "/", status_code=status.HTTP_201_CREATED, response_model=EducationDocument
-)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=EducationDocument)
 async def create_education(education: EducationDocument):
     """Create a new education."""
     await education.insert()
@@ -62,9 +60,7 @@ async def update_education(
     "/{education_id}/activities/{activity_id}",
     response_model=EducationDocument,
 )
-async def add_activity(
-    education_id: PydanticObjectId, activity_id: PydanticObjectId
-):
+async def add_activity(education_id: PydanticObjectId, activity_id: PydanticObjectId):
     """Add an activity to an education."""
     education = await get_education(education_id)
     activity = await ActivityDocument.get(activity_id)
