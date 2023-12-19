@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "resumeta-server"
+name = "server"
 version = "0.1.0"
 description = "Resume database and generation tool."
 authors = ["Ben Duncan <benjamin.h.duncan@gmail.com>"]
