@@ -8,4 +8,4 @@ COPY . /code
 
 RUN pip3 --no-cache-dir install poetry && poetry install
 
-CMD ["poetry", "run", "uvicorn", "server.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["poetry", "run", "uvicorn", "server.main:app", "--host", "0.0.0.0", "--port", "8080"]
