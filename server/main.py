@@ -3,11 +3,11 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from database import init_db
-from routes.activity import router as ActivityRouter
-from routes.education import router as EducationRouter
-from routes.employment import router as EmploymentRouter
-from routes.resume import router as ResumeRouter
+from server.database import init_db
+from server.routes.activity import router as ActivityRouter
+from server.routes.education import router as EducationRouter
+from server.routes.employment import router as EmploymentRouter
+from server.routes.resume import router as ResumeRouter
 
 
 @asynccontextmanager
