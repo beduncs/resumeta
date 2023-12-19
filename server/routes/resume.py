@@ -6,13 +6,13 @@ from beanie import PydanticObjectId
 from fastapi import APIRouter, HTTPException, status
 from loguru import logger
 
-from models.resume import (
+from server.models.resume import (
     EducationDocument,
     EmploymentDocument,
     ResumeDocument,
     UpdateResume,
 )
-from utils import pydantic_encoder
+from server.utils import pydantic_encoder
 
 logger.add("resumeta.log", format="{time} {level} {message}", level="INFO")
 router = APIRouter()
