@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "server"
+version = "0.1.0"
+description = "Resume database and generation tool."
+authors = ["Ben Duncan <benjamin.h.duncan@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.1"
+loguru = "^0.7.2"
+python-dotenv = "^1.0.0"
+beanie = "^1.23.6"
+uvicorn = "^0.24.0.post1"
+pre-commit = "^3.6.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+ruff = "^0.1.8"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
