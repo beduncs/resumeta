@@ -3,11 +3,10 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from server.database import init_db
-from server.routes.activity import router as ActivityRouter
-from server.routes.education import router as EducationRouter
-from server.routes.employment import router as EmploymentRouter
-from server.routes.resume import router as ResumeRouter
+from resumeta_api.database import init_db
+from resumeta_api.educations.router import router as EducationRouter
+from resumeta_api.employments.router import router as EmploymentRouter
+from resumeta_api.resumes.router import router as ResumeRouter
 
 
 @asynccontextmanager
@@ -34,9 +33,8 @@ app.add_middleware(
 
 
 app.include_router(ResumeRouter, tags=["Resumes"], prefix="/resumes")
-app.include_router(EmploymentRouter, tags=["Employments"], prefix="/employment")
-app.include_router(EducationRouter, tags=["Education"], prefix="/education")
-app.include_router(ActivityRouter, tags=["Activities"], prefix="/activity")
+app.include_router(EmploymentRouter, tags=["Employments"], prefix="/employments")
+app.include_router(EducationRouter, tags=["Educations"], prefix="/educations")
 
 
 @app.get("/", tags=["Root"])

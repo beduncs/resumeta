@@ -6,13 +6,11 @@ from beanie import PydanticObjectId
 from fastapi import APIRouter, HTTPException, status
 from loguru import logger
 
-from server.models.resume import (
-    EducationDocument,
-    EmploymentDocument,
-    ResumeDocument,
-    UpdateResume,
-)
-from server.utils import pydantic_encoder
+from resumeta_api.educations.models import EducationDocument
+from resumeta_api.employments.models import EmploymentDocument
+from resumeta_api.resumes.models import ResumeDocument, UpdateResume
+
+from resumeta_api.config import encode_input
 
 logger.add("resumeta.log", format="{time} {level} {message}", level="INFO")
 router = APIRouter()
@@ -49,13 +47,13 @@ async def get_resume(resume_id: PydanticObjectId):
 async def update_resume(resume_id: PydanticObjectId, resume_data: UpdateResume):
     """Update a resume by id."""
     resume = await get_resume(resume_id)
-    resume_data = pydantic_encoder.encode_input(resume_data)
+    resume_data = encode_input(resume_data)
     _ = await resume.update({"$set": resume_data})
     updated_resume = await get_resume(resume_id)
     return updated_resume
 
 
-@router.post("/{resume_id}/employment/{employment_id}", response_model=ResumeDocument)
+@router.post("/{resume_id}/employments/{employment_id}", response_model=ResumeDocument)
 async def add_employment(resume_id: PydanticObjectId, employment_id: PydanticObjectId):
     """Add employment to a resume."""
     resume = await ResumeDocument.get(resume_id)
@@ -66,7 +64,9 @@ async def add_employment(resume_id: PydanticObjectId, employment_id: PydanticObj
     return resume
 
 
-@router.delete("/{resume_id}/resume/{employment_id}", response_model=ResumeDocument)
+@router.delete(
+    "/{resume_id}/employments/{employment_id}", response_model=ResumeDocument
+)
 async def remove_employment(
     resume_id: PydanticObjectId, employment_id: PydanticObjectId
 ):
@@ -79,7 +79,7 @@ async def remove_employment(
     return resume
 
 
-@router.post("/{resume_id}/education/{education_id}", response_model=ResumeDocument)
+@router.post("/{resume_id}/educations/{education_id}", response_model=ResumeDocument)
 async def add_education(resume_id: PydanticObjectId, education_id: PydanticObjectId):
     """Add education to a resume."""
     resume = await ResumeDocument.get(resume_id)
@@ -90,7 +90,7 @@ async def add_education(resume_id: PydanticObjectId, education_id: PydanticObjec
     return resume
 
 
-@router.delete("/{resume_id}/education/{education_id}", response_model=ResumeDocument)
+@router.delete("/{resume_id}/educations/{education_id}", response_model=ResumeDocument)
 async def remove_education(resume_id: PydanticObjectId, education_id: PydanticObjectId):
     """Delete a education from a resume by id."""
     resume = await get_resume(resume_id)

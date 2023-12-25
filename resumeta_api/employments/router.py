@@ -5,13 +5,12 @@ from typing import List
 from beanie import PydanticObjectId
 from fastapi import APIRouter, HTTPException, status
 from loguru import logger
-
-from server.models.resume import (
-    ActivityDocument,
+from resumeta_api.employments.models import (
     EmploymentDocument,
     UpdateEmployment,
 )
-from server.utils import pydantic_encoder
+
+from resumeta_api.config import encode_input
 
 logger.add("resumeta.log", format="{time} {level} {message}", level="INFO")
 router = APIRouter()
@@ -52,40 +51,10 @@ async def update_employment(
 ):
     """Update an employment by id."""
     employment = await get_employment(employment_id)
-    employment_data = pydantic_encoder.encode_input(employment_data)
+    employment_data = encode_input(employment_data)
     _ = await employment.update({"$set": employment_data})
     updated_employment = await get_employment(employment_id)
     return updated_employment
-
-
-@router.post(
-    "/{employment_id}/activity/{activity_id}",
-    response_model=EmploymentDocument,
-)
-async def add_activity(employment_id: PydanticObjectId, activity_id: PydanticObjectId):
-    """Add an activity to an employment."""
-    employment = await get_employment(employment_id)
-    activity = await ActivityDocument.get(activity_id)
-    if activity not in employment.activities:
-        employment.activities.append(activity)
-    await employment.save()
-    return employment
-
-
-@router.delete(
-    "/{employment_id}/activity/{activity_id}",
-    response_model=EmploymentDocument,
-)
-async def remove_activity(
-    employment_id: PydanticObjectId, activity_id: PydanticObjectId
-):
-    """Remove an activity from an employment."""
-    employment = await get_employment(employment_id)
-    activity = await ActivityDocument.get(activity_id)
-    if activity in employment.activities:
-        employment.activities.remove(activity)
-    await employment.save()
-    return employment
 
 
 @router.delete("/{employment_id}", status_code=status.HTTP_204_NO_CONTENT)

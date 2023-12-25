@@ -6,12 +6,12 @@ from beanie import PydanticObjectId
 from fastapi import APIRouter, HTTPException, status
 from loguru import logger
 
-from server.models.resume import (
-    ActivityDocument,
+from resumeta_api.educations.models import (
     EducationDocument,
     UpdateEducation,
 )
-from server.utils import pydantic_encoder
+
+from resumeta_api.config import encode_input
 
 logger.add("resumeta.log", format="{time} {level} {message}", level="INFO")
 router = APIRouter()
@@ -50,40 +50,10 @@ async def update_education(
 ):
     """Update an education by id."""
     education = await get_education(education_id)
-    education_data = pydantic_encoder.encode_input(education_data)
+    education_data = encode_input(education_data)
     _ = await education.update({"$set": education_data})
     updated_education = await get_education(education_id)
     return updated_education
-
-
-@router.post(
-    "/{education_id}/activities/{activity_id}",
-    response_model=EducationDocument,
-)
-async def add_activity(education_id: PydanticObjectId, activity_id: PydanticObjectId):
-    """Add an activity to an education."""
-    education = await get_education(education_id)
-    activity = await ActivityDocument.get(activity_id)
-    if activity not in education.activities:
-        education.activities.append(activity)
-    await education.save()
-    return education
-
-
-@router.delete(
-    "/{education_id}/activities/{activity_id}",
-    response_model=EducationDocument,
-)
-async def remove_activity(
-    education_id: PydanticObjectId, activity_id: PydanticObjectId
-):
-    """Remove an activity from an education."""
-    education = await get_education(education_id)
-    activity = await ActivityDocument.get(activity_id)
-    if activity in education.activities:
-        education.activities.remove(activity)
-    await education.save()
-    return education
 
 
 @router.delete("/{education_id}", status_code=status.HTTP_204_NO_CONTENT)

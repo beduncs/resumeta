@@ -1,3 +1,5 @@
+# Define the global configs
+
 from fastapi.encoders import jsonable_encoder
 import datetime
 
