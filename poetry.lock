@@ -55,6 +55,17 @@ queue = ["beanie-batteries-queue (>=0.2)"]
 test = ["asgi-lifespan (>=1.0.1)", "dnspython (>=2.1.0)", "fastapi (>=0.100)", "flake8 (>=3)", "httpx (>=0.23.0)", "pre-commit (>=2.3.0)", "pydantic-extra-types (>=2)", "pydantic-settings (>=2)", "pyright (>=0)", "pytest (>=6.0.0)", "pytest-asyncio (>=0.21.0)", "pytest-cov (>=2.8.1)"]
 
 [[package]]
+name = "certifi"
+version = "2023.11.17"
+description = "Python package for providing Mozilla's CA Bundle."
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "certifi-2023.11.17-py3-none-any.whl", hash = "sha256:e036ab49d5b79556f99cfc2d9320b34cfbe5be05c5871b51de9329f0603b0474"},
+    {file = "certifi-2023.11.17.tar.gz", hash = "sha256:9b469f3a900bf28dc19b8cfbf8019bf47f7fdd1a65a1d4ffb98fc14166beb4d1"},
+]
+
+[[package]]
 name = "cfgv"
 version = "3.4.0"
 description = "Validate configuration and produce human readable error messages."
@@ -168,6 +179,51 @@ files = [
 ]
 
 [[package]]
+name = "httpcore"
+version = "1.0.2"
+description = "A minimal low-level HTTP client."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "httpcore-1.0.2-py3-none-any.whl", hash = "sha256:096cc05bca73b8e459a1fc3dcf585148f63e534eae4339559c9b8a8d6399acc7"},
+    {file = "httpcore-1.0.2.tar.gz", hash = "sha256:9fc092e4799b26174648e54b74ed5f683132a464e95643b226e00c2ed2fa6535"},
+]
+
+[package.dependencies]
+certifi = "*"
+h11 = ">=0.13,<0.15"
+
+[package.extras]
+asyncio = ["anyio (>=4.0,<5.0)"]
+http2 = ["h2 (>=3,<5)"]
+socks = ["socksio (==1.*)"]
+trio = ["trio (>=0.22.0,<0.23.0)"]
+
+[[package]]
+name = "httpx"
+version = "0.26.0"
+description = "The next generation HTTP client."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "httpx-0.26.0-py3-none-any.whl", hash = "sha256:8915f5a3627c4d47b73e8202457cb28f1266982d1159bd5779d86a80c0eab1cd"},
+    {file = "httpx-0.26.0.tar.gz", hash = "sha256:451b55c30d5185ea6b23c2c793abf9bb237d2a7dfb901ced6ff69ad37ec1dfaf"},
+]
+
+[package.dependencies]
+anyio = "*"
+certifi = "*"
+httpcore = "==1.*"
+idna = "*"
+sniffio = "*"
+
+[package.extras]
+brotli = ["brotli", "brotlicffi"]
+cli = ["click (==8.*)", "pygments (==2.*)", "rich (>=10,<14)"]
+http2 = ["h2 (>=3,<5)"]
+socks = ["socksio (==1.*)"]
+
+[[package]]
 name = "identify"
 version = "2.5.33"
 description = "File identification library for Python"
@@ -234,6 +290,35 @@ win32-setctime = {version = ">=1.0.0", markers = "sys_platform == \"win32\""}
 
 [package.extras]
 dev = ["Sphinx (==7.2.5)", "colorama (==0.4.5)", "colorama (==0.4.6)", "exceptiongroup (==1.1.3)", "freezegun (==1.1.0)", "freezegun (==1.2.2)", "mypy (==v0.910)", "mypy (==v0.971)", "mypy (==v1.4.1)", "mypy (==v1.5.1)", "pre-commit (==3.4.0)", "pytest (==6.1.2)", "pytest (==7.4.0)", "pytest-cov (==2.12.1)", "pytest-cov (==4.1.0)", "pytest-mypy-plugins (==1.9.3)", "pytest-mypy-plugins (==3.0.0)", "sphinx-autobuild (==2021.3.14)", "sphinx-rtd-theme (==1.3.0)", "tox (==3.27.1)", "tox (==4.11.0)"]
+
+[[package]]
+name = "mongomock"
+version = "4.1.2"
+description = "Fake pymongo stub for testing simple MongoDB-dependent code"
+optional = false
+python-versions = "*"
+files = [
+    {file = "mongomock-4.1.2-py2.py3-none-any.whl", hash = "sha256:08a24938a05c80c69b6b8b19a09888d38d8c6e7328547f94d46cadb7f47209f2"},
+    {file = "mongomock-4.1.2.tar.gz", hash = "sha256:f06cd62afb8ae3ef63ba31349abd220a657ef0dd4f0243a29587c5213f931b7d"},
+]
+
+[package.dependencies]
+packaging = "*"
+sentinels = "*"
+
+[[package]]
+name = "mongomock-motor"
+version = "0.0.25"
+description = "Library for mocking AsyncIOMotorClient built on top of mongomock."
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "mongomock_motor-0.0.25-py3-none-any.whl", hash = "sha256:76f244a5ed9f3bbd5375c64141588b3ac8fe0a3547662ae1e261dad611fe929a"},
+    {file = "mongomock_motor-0.0.25.tar.gz", hash = "sha256:8202ec8071984494d04f412d0e1f9ef87c3a066e10ed2ad4e8d71073b6950adf"},
+]
+
+[package.dependencies]
+mongomock = ">=3.23.0,<5.0.0"
 
 [[package]]
 name = "motor"
@@ -691,6 +776,16 @@ files = [
 ]
 
 [[package]]
+name = "sentinels"
+version = "1.0.0"
+description = "Various objects to denote special meanings in python"
+optional = false
+python-versions = "*"
+files = [
+    {file = "sentinels-1.0.0.tar.gz", hash = "sha256:7be0704d7fe1925e397e92d18669ace2f619c92b5d4eb21a89f31e026f9ff4b1"},
+]
+
+[[package]]
 name = "setuptools"
 version = "69.0.2"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
@@ -811,4 +906,4 @@ dev = ["black (>=19.3b0)", "pytest (>=4.6.2)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "a0ff9ff6096e422fb9721590cb4574c66ef9a3c02b28ffe85c5d0c94054f68c1"
+content-hash = "2897696f1b6c8e1f2ce5a5fc13c1482fdc1ef4f6abd2c0254867d12a58ccb95e"
